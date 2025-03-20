@@ -127,19 +127,19 @@ get:
                   first:
                     type: string
                     nullable: true
-                    example: '/scm/v1/carts?partyId=bv8ag877hfjnao&page=1'
+                    example: /insurances&page=1
                   prev:
                     type: string
                     nullable: true
-                    example: '/scm/v1/carts?partyId=bv8ag877hfjnao&page=1'
+                    example: /insurances&page=1
                   next:
                     type: string
                     nullable: true
-                    example: '/scm/v1/carts?partyId=bv8ag877hfjnao&page=3'
+                    example: /insurances&page=2
                   last:
                     type: string
                     nullable: true
-                    example: '/scm/v1/carts?partyId=bv8ag877hfjnao&page=15'
+                    example: /insurances&page=5
               data:
                 type: array
                 items:
