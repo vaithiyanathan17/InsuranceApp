@@ -43,6 +43,7 @@ const FilterForm = ({ onApply, initialFilters, policyTypes }) => {
     e.preventDefault();
 
     // Construct API filter query dynamically
+    //{'filter[name][eq]': car}
     const filterQuery = {};
     if (filters.name) filterQuery['filter[name][eq]'] = filters.name;
     if (filters.policyType) filterQuery['filter[policyType][eq]'] = filters.policyType;

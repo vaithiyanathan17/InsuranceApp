@@ -10,6 +10,8 @@ import cors from 'cors';
 
 const app = express();
 const __dirname = path.resolve();
+
+// open api specs
 const apiBundlePath = path.join(__dirname, 'bundle', 'insuranceApi.yaml');
 
 dotenv.config();
@@ -38,6 +40,7 @@ app.set('query parser', (str: string) => {
   });
 });
 
+// middleware to validate request against api specification
 app.use(OpenApiValidator.middleware({
     apiSpec: apiBundlePath,
     validateRequests: true,

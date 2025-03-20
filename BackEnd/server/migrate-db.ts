@@ -15,6 +15,8 @@ const seedDatabase = async (db: any) => {
     }
 };
 
+
+// seed data invoking function
 (async function postDeploy() {
     console.info("## Starting DB migrations Job");
     try {

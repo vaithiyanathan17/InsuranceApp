@@ -1,5 +1,7 @@
 import { SQLOperator } from "./types.js";
 
+// Where name = ?
+// params -> (?)
 export class SQLiteQueryBuilder {
     static buildWhereClause(
         filters: Record<string, any>
@@ -24,9 +26,14 @@ export class SQLiteQueryBuilder {
       
             validOperators.forEach(([op, val]) => {
                 if(fullKey === 'name') {
+                  if(this.getOperatorSymbol(op) == '='){
                     conditions.push(`${fullKey} LIKE ?`)
                     params.push(`%${val}%`);
-                } 
+                  } else if (this.getOperatorSymbol(op) == '!=') {
+                    conditions.push(`${fullKey} NOT LIKE ?`)
+                    params.push(`%${val}%`);
+                  }
+                }
                 else {
                   if(fullKey === 'policytype') {
                     fullKey = 'type'

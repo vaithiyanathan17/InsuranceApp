@@ -4,6 +4,8 @@ import { policy, QueryParams, Result } from "../types.js";
 import { SQLiteQueryBuilder } from "../query-builder.js";
 import { buildPagination } from "../paginator.js";
 
+
+// all the database specific operation goes here
 export default class PolicyModel {
   static getCount() {
     const db = SQLiteConnector.getInstance();
