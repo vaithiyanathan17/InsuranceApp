@@ -1,0 +1,18 @@
+openapi: 3.0.1
+info:
+  title: "Insurance Application Server"
+  version: "1.0.0"
+  description: "API for getting the list of insurances from the database"
+  contact:
+    name: "API Support"
+    email: "vaithiyanathan.veerappan@gmail.com"
+tags:
+    - name: Insurance Api
+      description: Fetching insurance from the backend
+paths:
+  /:
+    $ref: paths/defaultGet.yaml
+  /insurances:
+    $ref: paths/getInsurances.yaml
+  /insurances/type:
+    $ref: paths/getInsurancesType.yaml

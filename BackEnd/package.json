@@ -1,0 +1,46 @@
+{
+  "name": "policies-service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build:docs": "openapi bundle openApi/openApi.yaml -o bundle/insuranceApi.yaml",
+    "start:docs": "openapi preview-docs --use-community-edition openapi/openapi.yaml --port 9090",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "APP_PROFILE=local npm run build && node dist/index.js",
+    "stop": "pkill -f 'node dist/index.js'",
+    "docker:build": "APP_PROFILE=docker node dist/index.js",
+    "start:docker": "docker-compose --profile docker up --build",
+    "stop:docker": "docker-compose down",
+    "start:dev": "nodemon --exec tsx src/index.ts",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc --build ./tsconfig.json"
+  },
+  "type": "module",
+  "engines": {
+    "node": "==18.20.7"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "better-sqlite3": "^11.9.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-openapi-validator": "^5.3.9",
+    "mongoose": "^8.9.2",
+    "url": "^0.11.4"
+  },
+  "devDependencies": {
+    "@redocly/openapi-cli": "^0.12.16",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.13.10",
+    "@types/sqlite3": "^3.1.11",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

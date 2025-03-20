@@ -1,0 +1,15 @@
+get:
+  tags: ["Insurance Api"]
+  summary: /insurances/type
+  description: |
+        "Get all the Insurance type"
+  operationId: "v1GetInsurancesType"
+  responses:
+    '200':
+      description: "A list of Insurances Type"
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: string

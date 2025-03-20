@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    // Base configuration
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "sourceMap": true,
+    "module": "NodeNext",
+    "allowJs": false,
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "lib": ["ES2021"],
+    "target": "ES2021",
+    "incremental": true,
+    "assumeChangesOnlyAffectDirectDependencies": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node16",
+    "useUnknownInCatchVariables": false,
+
+    // Project-specific overrides
+    "rootDir": "./",
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "strict": false,
+    "composite": false,
+    "declaration": false,
+    "types": ["node", "mocha"]
+  },
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules", "dist", "test/**/*.ts"]
+}
