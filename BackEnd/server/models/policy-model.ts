@@ -99,17 +99,4 @@ export default class PolicyModel {
     const types = db.prepare(`SELECT DISTINCT(type) FROM policies`).all() as { type: string }[];
     return types.map(row => row.type);
   }
-
-  static insertPolicy(
-    name: string,
-    type: string,
-    premium: number,
-    coverage: number
-  ) {
-    const db: Database = SQLiteConnector.getInstance();
-    const stmt = db.prepare(
-      "INSERT INTO policies (name, type, premium, coverage) VALUES (?, ?, ?, ?)"
-    );
-    return stmt.run(name, type, premium, coverage);
-  }
 }
