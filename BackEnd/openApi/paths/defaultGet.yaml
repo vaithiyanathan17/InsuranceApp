@@ -1,0 +1,11 @@
+get:
+  tags: ["Insurance Api"]
+  summary: /
+  description: "Health check"
+  responses:
+    '200':
+      description: "Health check"
+      content:
+        application/json:
+          schema:
+            type: string

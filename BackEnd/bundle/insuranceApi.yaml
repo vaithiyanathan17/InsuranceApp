@@ -1,0 +1,219 @@
+openapi: 3.0.1
+info:
+  title: Insurance Application Server
+  version: 1.0.0
+  description: API for getting the list of insurances from the database
+  contact:
+    name: API Support
+    email: vaithiyanathan.veerappan@gmail.com
+tags:
+  - name: Insurance Api
+    description: Fetching insurance from the backend
+paths:
+  /:
+    get:
+      tags:
+        - Insurance Api
+      summary: /
+      description: Health check
+      responses:
+        '200':
+          description: Health check
+          content:
+            application/json:
+              schema:
+                type: string
+  /insurances:
+    get:
+      tags:
+        - Insurance Api
+      summary: /insurances
+      description: >
+        "Get all the Insurances"
+
+        The following are the operators that can be used in filters
+
+        | Operator Literal | Description |
+
+        | :--: | :--: |
+
+        | eq | equal to - Return results if the value of the search criteria
+        field is equal to the supplied value. |
+
+        | ne | not equal to - Return results if the value of the search criteria
+        field is not equal to the supplied value. |
+
+        | gt | greater than - Return results if the value of the search criteria
+        field is strictly greater than the supplied value. |
+
+        | gte | greater than or equal to - Return results if the value of the
+        search criteria field is greater than or equal to the supplied value. |
+
+        | lt | less than - Return results if the value of the search criteria
+        field is strictly lesser than the supplied value. |
+
+        | lte | less than or equal to - Return results if the value of the
+        search criteria field is lesser than or equal to the supplied value. |
+
+
+        order structure "`order`, `=`, `Order-Direction`, `Order-Field`".
+
+        where,
+
+        "Order-Direction: 'By not specifying a direction, it is ascending' | ' -
+        for descending'"
+
+        "Order-Field: The field to order on"
+      operationId: v1GetInsurances
+      parameters:
+        - name: filter
+          in: query
+          style: deepObject
+          explode: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: object
+                properties:
+                  eq:
+                    type: string
+                  ne:
+                    type: string
+                additionalProperties: false
+              premium:
+                type: object
+                properties:
+                  eq:
+                    type: integer
+                  ne:
+                    type: integer
+                  gt:
+                    type: integer
+                  gte:
+                    type: integer
+                  lt:
+                    type: integer
+                  lte:
+                    type: integer
+                additionalProperties: false
+              policyType:
+                type: object
+                properties:
+                  eq:
+                    type: string
+                  ne:
+                    type: string
+                additionalProperties: false
+              coverage:
+                type: object
+                properties:
+                  eq:
+                    type: integer
+                  ne:
+                    type: integer
+                  gt:
+                    type: integer
+                  gte:
+                    type: integer
+                  lt:
+                    type: integer
+                  lte:
+                    type: integer
+                additionalProperties: false
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: order
+          in: query
+          schema:
+            type: string
+            enum:
+              - '-name'
+              - name
+              - '-premium'
+              - premium
+              - type
+              - '-type'
+              - coverage
+              - '-coverage'
+            example: '-name'
+      responses:
+        '200':
+          description: A list of Insurances
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      totalResults:
+                        type: number
+                        example: 15
+                      page:
+                        type: number
+                        example: 1
+                      totalPages:
+                        type: number
+                        example: 1
+                      resultsPerPage:
+                        type: number
+                        example: 50
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        nullable: true
+                        example: /scm/v1/carts?partyId=bv8ag877hfjnao&page=1
+                      prev:
+                        type: string
+                        nullable: true
+                        example: /scm/v1/carts?partyId=bv8ag877hfjnao&page=1
+                      next:
+                        type: string
+                        nullable: true
+                        example: /scm/v1/carts?partyId=bv8ag877hfjnao&page=3
+                      last:
+                        type: string
+                        nullable: true
+                        example: /scm/v1/carts?partyId=bv8ag877hfjnao&page=15
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        type:
+                          type: string
+                        premium:
+                          type: integer
+                        coverage:
+                          type: integer
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Serving request error
+        '503':
+          description: Servive Unavailable
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Service unavailable Database connection is closed
+components: {}
