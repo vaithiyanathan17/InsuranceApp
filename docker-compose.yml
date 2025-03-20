@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./BackEnd
+    container_name: backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - APP_PROFILE=docker
+      - DATABASE_URL=/app/data/database.sqlite
+    volumes:
+      - ./BackEnd/data:/app/data:rw
+    restart: always
+    entrypoint: ["/bin/sh", "-c", "mkdir -p /app/data && chmod -R 777 /app/data && node dist/index.js"]
+
+  frontend:
+    build: ./FrontEnd
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./FrontEnd:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend

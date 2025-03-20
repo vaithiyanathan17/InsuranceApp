@@ -11,7 +11,7 @@ export class SQLiteQueryBuilder {
           if (!value) continue;
 
           const column = this.camelToLowerCase(key);
-          const fullKey = column;
+          let fullKey = column;
       
           if (typeof value === 'object' && !Array.isArray(value)) {
             const ops = value as SQLOperator;
@@ -26,9 +26,13 @@ export class SQLiteQueryBuilder {
                 if(fullKey === 'name') {
                     conditions.push(`${fullKey} LIKE ?`)
                     params.push(`%${val}%`);
-                } else {
-                    conditions.push(`${fullKey} ${this.getOperatorSymbol(op)} ?`);
-                    params.push(val);
+                } 
+                else {
+                  if(fullKey === 'policytype') {
+                    fullKey = 'type'
+                  }
+                  conditions.push(`${fullKey} ${this.getOperatorSymbol(op)} ?`);
+                  params.push(val);
                 }
             });
           } else {

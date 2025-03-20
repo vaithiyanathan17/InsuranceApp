@@ -6,12 +6,15 @@ import * as OpenApiValidator from 'express-openapi-validator';
 import path from "path";
 import "./server/migrate-db.js";
 import qs from 'qs';
+import cors from 'cors';
 
 const app = express();
 const __dirname = path.resolve();
 const apiBundlePath = path.join(__dirname, 'bundle', 'insuranceApi.yaml');
 
 dotenv.config();
+
+app.use(cors());
 
 app.use(express.json());
 

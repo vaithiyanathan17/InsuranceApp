@@ -14,3 +14,5 @@ paths:
     $ref: paths/defaultGet.yaml
   /insurances:
     $ref: paths/getInsurances.yaml
+  /insurances/type:
+    $ref: paths/getInsurancesType.yaml

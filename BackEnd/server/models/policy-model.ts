@@ -92,6 +92,12 @@ export default class PolicyModel {
     }
   }
 
+  static getPolicyType() {
+    const db = SQLiteConnector.getInstance();
+    const types = db.prepare(`SELECT DISTINCT(type) FROM policies`).all() as { type: string }[];
+    return types.map(row => row.type);
+  }
+
   static insertPolicy(
     name: string,
     type: string,

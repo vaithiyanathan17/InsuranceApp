@@ -24,3 +24,12 @@ router.get('/insurances', (req, res, next)=>{
         res.status(500).send('Serving request error');
     }
 })
+
+router.get('/insurances/type', (req,resolve, next)=>{
+    try{
+        const distinctPolicies = PolicyModel.getPolicyType();
+        resolve.status(200).send(distinctPolicies)
+    } catch(error) {
+        console.log(error);
+    }
+})
